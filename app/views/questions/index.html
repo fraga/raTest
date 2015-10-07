@@ -1,0 +1,30 @@
+		<h1>Question {{ questionCtrl.index }} - {{ questionCtrl.question.type }}</h1>
+		<timer interval="1000">{{ mminutes }} minutes, {{sseconds}} seconds</timer>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-bold">{{ questionCtrl.question.description }}
+				<span class="label label-success" ng-show="questionCtrl.answered && questionCtrl.isCorrect">Correct!</span>
+				<span class="label label-danger" ng-show="questionCtrl.answered && !questionCtrl.isCorrect">Incorrect, correct is ({{ questionCtrl.question.correct }})</span>
+        <span class="label label-info" ng-show="questionCtrl.answered">
+			<timer interval="1000">{{ mminutes }} minutes, {{sseconds}} seconds</timer>
+		</span>
+		  </div>
+		  <form class="panel-body" name="myform">
+		      <div class="form-group">
+					<div class="radio" ng-repeat="answer in questionCtrl.question.answers">
+						<label>
+							<input type="radio" ng-model="questionCtrl.choice" value="{{ answer.value }}" name="answer" ng-disabled="questionCtrl.answered">
+							{{ answer.desc }}
+						</label>
+					</div>
+								 <button type="button" class="btn btn-primary" ng-click="questionCtrl.verify(questionCtrl.choice, questionCtrl.question.correct)" ng-disabled="questionCtrl.answered">Submit</button>
+				</div>
+				<p><tt>choice = {{ questionCtrl.choice }}</tt></p>
+		  </form>
+			<div class="panel-footer">
+				<button type="button" class="btn btn-default btn-lg" ng-click="questionCtrl.previousQuestion()">
+				  <span class="glyphicon glyphicon-step-backward"></span>Previous</button>
+				  <button type="button" class="btn btn-default btn-lg" ng-click="questionCtrl.nextQuestion()">
+				  Next<span class="glyphicon glyphicon-step-forward"></span></button>
+			</div>
+		</div>
